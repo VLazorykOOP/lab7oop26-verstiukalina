@@ -74,3 +74,144 @@ void sortuvatyMasyv<char *>(char *arr[], int n)
         arr[minIndex] = temp;
     }
 }
+
+
+template <typename T>
+class TsyklichnaCherha
+{
+private:
+    T *arr;
+    int size;
+    int front;
+    int rear;
+    int count;
+
+public:
+    TsyklichnaCherha(int s)
+    {
+        size = s;
+        arr = new T[size];
+        front = 0;
+        rear = -1;
+        count = 0;
+    }
+
+    ~TsyklichnaCherha()
+    {
+        delete[] arr;
+    }
+
+    bool chyPorozhnya()
+    {
+        return count == 0;
+    }
+
+    bool chyZapovnena()
+    {
+        return count == size;
+    }
+
+    void dodaty(T value)
+    {
+        if (chyZapovnena())
+        {
+            cout << "Черга заповнена\n";
+            return;
+        }
+
+        rear = (rear + 1) % size;
+        arr[rear] = value;
+        count++;
+    }
+
+    T vydalyty()
+    {
+        if (chyPorozhnya())
+        {
+            cout << "Черга порожня\n";
+            return T();
+        }
+
+        T value = arr[front];
+        front = (front + 1) % size;
+        count--;
+        return value;
+    }
+
+    void druk()
+    {
+        if (chyPorozhnya())
+        {
+            cout << "Черга порожня\n";
+            return;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            cout << arr[(front + i) % size] << " ";
+        }
+        cout << endl;
+    }
+};
+
+template <typename T>
+class MiyMasyv
+{
+private:
+    T *arr;
+    int size;
+
+public:
+    MiyMasyv(int s)
+    {
+        size = s;
+        arr = new T[size];
+    }
+
+    ~MiyMasyv()
+    {
+        delete[] arr;
+    }
+
+    void vstanovyty(int index, T value)
+    {
+        arr[index] = value;
+    }
+
+    T otrymaty(int index)
+    {
+        return arr[index];
+    }
+
+    int otrymatyRozmir()
+    {
+        return size;
+    }
+};
+
+template <typename T>
+class IteratorMasyvu
+{
+private:
+    MiyMasyv<T> *array;
+    int index;
+
+public:
+    IteratorMasyvu(MiyMasyv<T> *a)
+    {
+        array = a;
+        index = 0;
+    }
+
+    bool yeNastupnyi()
+    {
+        return index < array->otrymatyRozmir();
+    }
+
+    T nastupnyi()
+    {
+        T value = array->otrymaty(index);
+        index++;
+        return value;
+    }
+};
