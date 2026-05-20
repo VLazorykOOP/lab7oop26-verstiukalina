@@ -215,3 +215,43 @@ public:
         return value;
     }
 };
+
+
+void vvestyZKlaviatury(int arr[], int n)
+{
+    cout << "Введіть " << n << " цілих чисел: ";
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+}
+
+void vvestyZFailu(int arr[], int n)
+{
+    ifstream file("task1_int.txt");
+
+    for (int i = 0; i < n; i++)
+    {
+        file >> arr[i];
+    }
+
+    file.close();
+}
+
+void zapovnytyVypadkovo(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = rand() % 100;
+    }
+}
+
+template <typename T>
+void drukuvatyMasyv(T arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
