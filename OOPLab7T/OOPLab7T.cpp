@@ -444,7 +444,7 @@ void zapustytyZadachu4()
 int main()
 {
     srand(time(0));
-    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(1251);
 
     int choice;
 
